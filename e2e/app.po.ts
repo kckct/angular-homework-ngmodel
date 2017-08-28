@@ -1,11 +1,19 @@
 import { browser, by, element } from 'protractor';
 
-export class AngularHomeworkNgmodelPage {
+export class NgPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getCheckbox(): any {
+    return element(by.id('checkbox1'));
+  }
+
+  toggleCheck(): any {
+    return this.getCheckbox().click();
+  }
+
+  getButton(): any {
+    return element(by.id('button1'));
   }
 }

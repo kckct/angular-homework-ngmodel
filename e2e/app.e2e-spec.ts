@@ -1,14 +1,27 @@
-import { AngularHomeworkNgmodelPage } from './app.po';
+import { NgPage } from './app.po';
 
-describe('angular-homework-ngmodel App', () => {
-  let page: AngularHomeworkNgmodelPage;
+describe('angular-homework-ngmodel', () => {
+  let page: NgPage;
 
   beforeEach(() => {
-    page = new AngularHomeworkNgmodelPage();
+    page = new NgPage();
   });
 
-  it('should display welcome message', () => {
+  it(`should have 1 checkbox`, () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getCheckbox().isPresent()).toBe(true);
+  });
+
+  it(`should enable button when checkbox checked`, () => {
+    page.navigateTo();
+    page.toggleCheck();
+    expect(page.getButton().isEnabled()).toBe(true);
+  });
+
+  it(`should disable button when checkbox unchecked`, () => {
+    page.navigateTo();
+    page.toggleCheck();
+    page.toggleCheck();
+    expect(page.getButton().isEnabled()).toBe(false);
   });
 });
