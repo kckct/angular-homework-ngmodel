@@ -1,32 +1,48 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { DebugElement } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+  let debugElement: DebugElement;
+  let htmlElement: HTMLElement;
+  let target: AppComponent;
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
-  }));
+      imports: [
+        FormsModule
+      ],
+    });
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
+    target = new AppComponent();
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!!');
-  }));
+  });
+
+  describe(`NgModel`, () => {
+    describe(`Integration Test`, () => {
+      it(`should have 'checkboxFlag' field on ngModel directive`, () => {
+        debugElement.query(By.css('#checkbox1')).triggerEventHandler('click', null);
+        expect(component.checkboxFlag).toBe(false);
+      });
+
+      it(`should use 'checkboxFlag' field`, () => {
+        component.checkboxFlag = true;
+        fixture.detectChanges();
+
+        htmlElement = debugElement.query(By.css('#button1')).nativeElement.disabled;
+        expect(htmlElement).toBe(false);
+      });
+    });
+  });
 });
