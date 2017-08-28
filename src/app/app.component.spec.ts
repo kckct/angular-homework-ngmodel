@@ -44,5 +44,11 @@ describe('AppComponent', () => {
         expect(htmlElement).toBe(false);
       });
     });
+
+    describe(`Unit Test`, () => {
+      it(`should have 'checkboxFlag' field with 'false'`, () => {
+        expect(target.checkboxFlag).toBe(false);
+      });
+    });
   });
 });
