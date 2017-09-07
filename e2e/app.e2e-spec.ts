@@ -12,16 +12,21 @@ describe('angular-homework-ngmodel', () => {
     expect(page.getCheckbox().isPresent()).toBe(true);
   });
 
+  it(`should have 1 submit button`, () => {
+    page.navigateTo();
+    expect(page.getButton().isPresent()).toBe(true);
+  });
+
   it(`should enable button when checkbox checked`, () => {
     page.navigateTo();
-    page.toggleCheck();
+    page.check();
     expect(page.getButton().isEnabled()).toBe(true);
   });
 
   it(`should disable button when checkbox unchecked`, () => {
     page.navigateTo();
-    page.toggleCheck();
-    page.toggleCheck();
+    page.check();
+    page.check();
     expect(page.getButton().isEnabled()).toBe(false);
   });
 });

@@ -9,7 +9,7 @@ export class NgPage {
     return element(by.id('checkbox1'));
   }
 
-  toggleCheck(): any {
+  check(): any {
     return this.getCheckbox().click();
   }
 

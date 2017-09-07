@@ -31,13 +31,15 @@ describe('AppComponent', () => {
 
   describe(`NgModel`, () => {
     describe(`Integration Test`, () => {
-      it(`should have 'checkboxFlag' field on ngModel directive`, () => {
-        debugElement.query(By.css('#checkbox1')).triggerEventHandler('click', null);
-        expect(component.checkboxFlag).toBe(false);
+      it(`should have 'isChecked' field on ngModel directive`, () => {
+        htmlElement = debugElement.query(By.css('#checkbox1')).nativeElement;
+        htmlElement.click();
+
+        expect(component.isChecked).toBe(true);
       });
 
-      it(`should use 'checkboxFlag' field`, () => {
-        component.checkboxFlag = true;
+      it(`should use 'isChecked' field`, () => {
+        component.isChecked = true;
         fixture.detectChanges();
 
         htmlElement = debugElement.query(By.css('#button1')).nativeElement.disabled;
@@ -46,8 +48,8 @@ describe('AppComponent', () => {
     });
 
     describe(`Unit Test`, () => {
-      it(`should have 'checkboxFlag' field with 'false'`, () => {
-        expect(target.checkboxFlag).toBe(false);
+      it(`should have 'isChecked' field with 'false'`, () => {
+        expect(target.isChecked).toBe(false);
       });
     });
   });
